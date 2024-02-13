@@ -25,12 +25,10 @@ class Auth:
 
     def authorization_header(self, request=None) -> str:
         """public method"""
-        if request is None:
+        if request == None:
             return None
-        if Authorization not in request:
-            return None
-        else:
-            return None
+        headers = request.headers
+        return headers.get("Authorization")
 
     def current_user(self, request=None) -> TypeVar('User'):
         """ public method"""
