@@ -29,6 +29,8 @@ def before_request():
         pass
     if auth.authorization_header(request) is None:
         unauthorized()
+
+
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """Unauthorized"""
