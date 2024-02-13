@@ -21,16 +21,6 @@ if auth_type:
     auth = Auth()
 
 
-def before_request():
-    """"""
-    if auth is None:
-        pass
-    if request.path is not auth.require_auth():
-        pass
-    if auth.authorization_header(request) is None:
-        unauthorized()
-
-
 @app.errorhandler(401)
 def unauthorized(error) -> str:
     """Unauthorized"""
