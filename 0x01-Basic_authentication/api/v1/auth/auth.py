@@ -7,7 +7,7 @@ from flask import request
 from typing import List, TypeVar
 
 
-class Auth():
+class Auth:
     """
     class to manage the API authenication
     """
@@ -21,18 +21,17 @@ class Auth():
         for excluded_path in excluded_paths:
             if path.rstrip('/') == excluded_path.rstrip('/'):
                 return False
-        return True
+        return False
 
 
     def authorization_header(self, request=None) -> str:
-        print(request)
         """public method"""
         if request is None:
             return None
         if Authorization not in request:
             return None
         else:
-            return 
+            return None
 
 
     def current_user(self, request=None) -> TypeVar('User'):
