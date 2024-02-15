@@ -54,12 +54,14 @@ class BasicAuth(Auth):
             return None
         if user_pwd is None or not isinstance(user_pwd, str):
             return None
-        if (User.search({'email': user_email})):
+        try:
             users = User.search({'email': user_email})
-            for user in users:
-                if user.is_valid_password(user_pwd):
-                    return user
+            if users:
+                if users[0].is_valid_password(user_pwd):
+                    return users[0]
                 return None
+        except KeyError:
+            return None
 
     def current_user(self, request=None) -> TypeVar('User'):
         """overloads Auth and retrieves the User instance for a request:"""
