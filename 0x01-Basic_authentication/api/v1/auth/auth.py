@@ -5,6 +5,7 @@ class to manage the API authenctication
 
 from flask import request
 from typing import List, TypeVar
+from re import match, sub
 
 
 class Auth:
@@ -19,7 +20,10 @@ class Auth:
         elif excluded_paths is None or len(excluded_paths) == 0:
             return True
         for excluded_path in excluded_paths:
-            if path.rstrip('/') == excluded_path.rstrip('/'):
+            if excluded_path[-1] == '*':
+                sub('*', '.*')
+            if path.rstrip('/') == excluded_path.rstrip('/') or\
+                    match(excluded_path, path):
                 return False
         return True
 
