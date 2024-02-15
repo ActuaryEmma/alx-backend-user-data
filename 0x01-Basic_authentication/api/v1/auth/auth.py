@@ -21,7 +21,7 @@ class Auth:
             return True
         for excluded_path in excluded_paths:
             if excluded_path[-1] == '*':
-                sub('*', '.*')
+                sub(r'\*', '.*')
             if path.rstrip('/') == excluded_path.rstrip('/') or\
                     match(excluded_path, path):
                 return False
