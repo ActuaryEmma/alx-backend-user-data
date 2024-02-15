@@ -20,10 +20,8 @@ class Auth:
         elif excluded_paths is None or len(excluded_paths) == 0:
             return True
         for excluded_path in excluded_paths:
-            if excluded_path[-1] == '*':
-                sub('*', '.*')
             if path.rstrip('/') == excluded_path.rstrip('/') or\
-                    match(excluded_path, path):
+                    (match(sub(r"\*", ".*", excluded_path), path)):
                 return False
         return True
 
