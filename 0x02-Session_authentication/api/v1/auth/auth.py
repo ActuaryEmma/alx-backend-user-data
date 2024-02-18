@@ -14,6 +14,10 @@ class Auth:
     class to manage the API authenication
     """
 
+    def __init__(self):
+        """init function"""
+        self.session_name = os.environ.get('SESSION_NAME', '_my_session_id')
+
     def require_auth(self, path: str, excluded_paths: List[str]) -> bool:
         """public method"""
         if path is None:
@@ -39,8 +43,6 @@ class Auth:
 
     def session_cookie(self, request=None):
         """returns a cookie value from a request"""
-        auth_type = os.getenv("SESSION_NAME")
         if request is None:
             return None
-        if auth_type == "_my_session_id":
-            return request.cookies.get(auth_type)
+        return request.cookies.get(self.session_name)
