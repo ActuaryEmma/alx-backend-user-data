@@ -22,7 +22,7 @@ def post_session():
         return jsonify({"error": "no user found for this email"}), 404
 
     if not users[0].is_valid_password(password):
-        return jsonify({"error": "wrong password"})
+        return jsonify({"error": "wrong password"}), 401
 
     from api.v1.app import auth
     value_session = auth.create_session(users[0].id)
