@@ -25,12 +25,14 @@ elif auth_type == "basic_auth":
 elif auth_type == "session_auth":
     from api.v1.auth.session_auth import SessionAuth
     auth = SessionAuth()
+elif auth_type == "session_exp_auth":
+    from api.v1.auth.session_exp_auth import SessionExpAuth
+    auth = SessionExpAuth()
 
 
 @app.before_request
 def before_request():
     """before request"""
-    request.current_user = auth.current_user(request)
     path = request.path
     paths = [
             '/api/v1/status/',
@@ -44,6 +46,7 @@ def before_request():
     if auth.authorization_header(request) is None and\
             auth.session_cookie(request) is None:
         abort(401)
+    request.current_user = auth.current_user(request)
     if auth.current_user(request) is None:
         abort(403)
 
