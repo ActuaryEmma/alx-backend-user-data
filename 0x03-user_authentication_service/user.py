@@ -10,6 +10,7 @@ Base = declarative_base()
 
 
 class User(Base):
+    """model User with database table names users"""
     __tablename__ = 'users'
 
     id = Column(Integer, primary_key=True)
