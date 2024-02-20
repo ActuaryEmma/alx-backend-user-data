@@ -13,12 +13,11 @@ def post_session():
     """post a session"""
     email = request.form.get('email')
     password = request.form.get('password')
-    if email is None:
+    if email is None or email == '':
         return jsonify({"error": "email missing"}), 400
-    if password is None:
+    if password is None or password == '':
         return jsonify({"error": "password missing"}), 400
     users = User.search({'email': email})
-    from api.v1.app import app
     if not users:
         return jsonify({"error": "no user found for this email"}), 404
 
