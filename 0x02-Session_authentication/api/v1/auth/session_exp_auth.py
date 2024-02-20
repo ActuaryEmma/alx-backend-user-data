@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 """
+Add an expiration date to a session ID
 """
 from api.v1.auth.session_auth import SessionAuth
 from datetime import datetime, timedelta
 import os
 
+
 class SessionExpAuth(SessionAuth):
     """
+    add an expiration date to a session ID
     """
     def __init__(self):
         """"""
@@ -30,10 +33,12 @@ class SessionExpAuth(SessionAuth):
         return session_id
 
     def user_id_for_session_id(self, session_id=None):
-        """"""
+        """
+        check the duration/ epiration
+        """
         if session_id is None:
             return None
-        if self.user_id_by_session_id[session_id] == None:
+        if self.user_id_by_session_id[session_id] is None:
             return None
         session_dict = self.user_id_by_session_id[session_id]
         if self.session_duration <= 0:
