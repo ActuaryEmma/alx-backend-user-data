@@ -46,5 +46,5 @@ class Auth:
         if request is None:
             return None
         return request.cookies.get(os.environ.get(
-            'SESSION_NAME', 
+            'SESSION_NAME',
             '_my_session_id'))
