@@ -12,12 +12,11 @@ class Auth:
     """
 
     def __init__(self):
+        """init function"""
         self._db = DB()
 
     def _hash_password(self, password: str):
         """ methods that takes in a string arg and returns bytes
-        bcrypt.hashpw:create the final hash stored in db takes(pass, salt) arg
-        bcrypt.gensalt() - generate salt
         """
         password_bytes = password.encode('utf-8')
         hashed = bcrypt.hashpw(password_bytes, bcrypt.gensalt())
