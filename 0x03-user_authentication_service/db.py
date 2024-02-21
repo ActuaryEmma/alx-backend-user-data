@@ -49,9 +49,9 @@ class DB:
                 user = query.one()
                 return user
         except NoResultFound:
-            raise NoResultFound("Not found")
+            raise NoResultFound()
         except InvalidRequestError:
-            raise InvalidRequestError("Invalid")
+            raise InvalidRequestError()
 
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update User"""
