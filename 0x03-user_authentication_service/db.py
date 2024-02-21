@@ -56,11 +56,11 @@ class DB:
     def update_user(self, user_id: int, **kwargs) -> None:
         """Update User"""
         user_to_update = self.find_user_by(id=user_id)
-        try:
-            if user_to_update:
-                for key, value in kwargs.items():
+        if user_to_update:
+            for key, value in kwargs.items():
+                if hasattr(user_to_update, key):
                     setattr(user_to_update, key, value)
-                self._session.commit()
-                return user_to_update
-        except ValueError:
-            raise ValueError("user attribute")
+                    self._session.commit()
+                    return None
+                else:
+                    raise ValueError("No attribute found")
