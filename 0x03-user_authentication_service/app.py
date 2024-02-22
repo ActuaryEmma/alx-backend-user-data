@@ -32,12 +32,14 @@ def login() -> str:
     email = request.form.get('email')
     password = request.form.get('password')
     if AUTH.valid_login(email, password):
-        AUTH.create_session(email=email)
-        return jsonify({"email": email, "message": "logged in"})
+        session_id = AUTH.create_session(email=email)
+        response = jsonify({"email": email, "message": "logged in"})
+        response.set_cookie("session_id", session_id)
+        return response
     abort(401)
 
 
-@app.route('/sessions', strict_slashes=True, methods=['DELETE'])
+@app.route('/sessions', methods=['DELETE'])
 def logout() -> str:
     """logout session"""
     session_id = request.cookies.get('session_id')
@@ -50,7 +52,7 @@ def logout() -> str:
     return redirect('/')
 
 
-@app.route('/profile', strict_slashes=True, methods=['GET'])
+@app.route('/profile', methods=['GET'])
 def profile():
     """user profile"""
     session_id = request.cookies.get('session_id')
