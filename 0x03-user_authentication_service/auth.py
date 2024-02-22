@@ -17,6 +17,11 @@ def _hash_password(password: str) -> bytes:
     return hashed
 
 
+def _generate_uuid() -> str:
+    """return a string represenation of a new UUID"""
+    return str(uuid.uuid4())
+
+
 class Auth:
     """Auth class to interact with the authentication database.
     """
@@ -54,7 +59,3 @@ class Auth:
         if bcrypt.checkpw(password, user_password):
             return True
         return False
-
-    def _generate_uuid():
-        """return a string represenation of a new UUID"""
-        return str(uuid.uuid4())
