@@ -5,10 +5,6 @@ Main file
 
 from db import DB
 from user import User
-
-#!/usr/bin/env python3
-""" End-to-end integration test"""
-
 import requests
 
 BASE_URL = 'http://localhost:5000'
