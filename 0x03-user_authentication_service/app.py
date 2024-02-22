@@ -27,7 +27,7 @@ def post_user():
 
 
 @app.route('/sessions', strict_slashes=True, methods=['POST'])
-def login():
+def login() -> str:
     """login function"""
     email = request.form.get('email')
     password = request.form.get('password')
